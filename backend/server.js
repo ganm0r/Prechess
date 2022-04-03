@@ -1,0 +1,1 @@
+console.log('[test] running nodemon with `npm run server`...');
