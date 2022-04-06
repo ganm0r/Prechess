@@ -23,7 +23,11 @@ const setGoal = asyncHandler(async (req, res) => {
         throw new Error("[error] please add a text field");
     }
 
-    res.status(200).send({ message: 'set goal' });
+    const goal = await Goal.create({
+        text: req.body.text,
+    })
+
+    res.status(200).send(goal);
 });
 
 /*
@@ -32,16 +36,36 @@ const setGoal = asyncHandler(async (req, res) => {
     @access         private
 */
 const updateGoal = asyncHandler(async (req, res) => {
-    res.status(200).send({ message: `update goal where id=${req.params.id}` });
+    const goal = await Goal.findById(req.params.id);
+
+    if(!goal) {
+        res.status(400);
+        throw new Error("[error] goal not found");
+    }
+
+    const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+    });
+
+    res.status(200).send(updatedGoal);
 });
 
 /*
     @description    delete goal for id
-    @route          DELTE /api/goals/:id
+    @route          DELETE /api/goals/:id
     @access         private
 */
 const deleteGoal = asyncHandler(async (req, res) => {
-    res.status(200).send({ message: `delete goal where id=${req.params.id}` });
+    const goal = await Goal.findById(req.params.id);
+
+    if(!goal) {
+        res.status(400);
+        throw new Error("[error] goal not found");
+    }
+
+    const deletedGoal = await Goal.findByIdAndDelete(req.params.id);
+
+    res.status(200).send(deletedGoal);
 });
 
 module.exports = {
