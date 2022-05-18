@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+
 const Goal = require("../models/goalmodel");
 
 /*
@@ -19,7 +20,7 @@ const getGoals = asyncHandler(async (req, res) => {
 */
 const setGoal = asyncHandler(async (req, res) => {
     if(!req.body.text) {
-        res.status(400)
+        res.status(400);
         throw new Error("[error] please add a text field");
     }
 
