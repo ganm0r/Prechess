@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/api/goals", require("./routes/goalrouter"));
+app.use("/api/games", require("./routes/gamerouter"));
 app.use("/api/users", require("./routes/userrouter"));
 
 app.use(errorHandler);
