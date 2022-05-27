@@ -7,7 +7,7 @@ const game = require("../models/gamemodel");
     @route          GET /api/games
     @access         private
 */
-const getgames = asyncHandler(async (req, res) => {
+const getGames = asyncHandler(async (req, res) => {
     const games = await game.find();
     
     res.status(200).send(games);
@@ -18,7 +18,7 @@ const getgames = asyncHandler(async (req, res) => {
     @route          POST /api/games
     @access         private
 */
-const setgame = asyncHandler(async (req, res) => {
+const setGame = asyncHandler(async (req, res) => {
     if(!req.body.text) {
         res.status(400);
         throw new Error("[error] please add a text field");
@@ -36,7 +36,7 @@ const setgame = asyncHandler(async (req, res) => {
     @route          PUT /api/games/:id
     @access         private
 */
-const updategame = asyncHandler(async (req, res) => {
+const updateGame = asyncHandler(async (req, res) => {
     const game = await game.findById(req.params.id);
 
     if(!game) {
@@ -44,11 +44,11 @@ const updategame = asyncHandler(async (req, res) => {
         throw new Error("[error] game not found");
     }
 
-    const updatedgame = await game.findByIdAndUpdate(req.params.id, req.body, {
+    const updatedGame = await game.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
     });
 
-    res.status(200).send(updatedgame);
+    res.status(200).send(updatedGame);
 });
 
 /*
@@ -56,7 +56,7 @@ const updategame = asyncHandler(async (req, res) => {
     @route          DELETE /api/games/:id
     @access         private
 */
-const deletegame = asyncHandler(async (req, res) => {
+const deleteGame = asyncHandler(async (req, res) => {
     const game = await game.findById(req.params.id);
 
     if(!game) {
@@ -64,14 +64,14 @@ const deletegame = asyncHandler(async (req, res) => {
         throw new Error("[error] game not found");
     }
 
-    const deletedgame = await game.findByIdAndDelete(req.params.id);
+    const deletedGame = await game.findByIdAndDelete(req.params.id);
 
-    res.status(200).send(deletedgame);
+    res.status(200).send(deletedGame);
 });
 
 module.exports = {
-    getgames,
-    setgame,
-    updategame,
-    deletegame,
+    getGames,
+    setGame,
+    updateGame,
+    deleteGame,
 };
