@@ -3,7 +3,9 @@ const router = express.Router();
 
 const { getGames, setGame, updateGame, deleteGame } = require("../controllers/gamecontroller");
 
-router.route("/").get(getGames).post(setGame);
-router.route("/:id").put(updateGame).delete(deleteGame);
+const { protect } =  require('../middleware/authhandler');
+
+router.route("/").get(protect, getGames).post(protect, setGame);
+router.route("/:id").put(protect, updateGame).delete(protect, deleteGame);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 
-const game = require("../models/gamemodel");
+const Game = require("../models/gamemodel");
+const User = require("../models/usermodel");
 
 /*
     @description    get games
@@ -8,7 +9,7 @@ const game = require("../models/gamemodel");
     @access         private
 */
 const getGames = asyncHandler(async (req, res) => {
-    const games = await game.find();
+    const games = await Game.find({ user: req.user.id });
     
     res.status(200).send(games);
 });
@@ -24,8 +25,9 @@ const setGame = asyncHandler(async (req, res) => {
         throw new Error("[error] please add a text field");
     }
 
-    const game = await game.create({
+    const game = await Game.create({
         text: req.body.text,
+        user: req.user.id,
     })
 
     res.status(200).send(game);
@@ -37,14 +39,26 @@ const setGame = asyncHandler(async (req, res) => {
     @access         private
 */
 const updateGame = asyncHandler(async (req, res) => {
-    const game = await game.findById(req.params.id);
+    const game = await Game.findById(req.params.id);
 
     if(!game) {
         res.status(400);
         throw new Error("[error] game not found");
     }
 
-    const updatedGame = await game.findByIdAndUpdate(req.params.id, req.body, {
+    const user = await User.findById(req.user.id);
+
+    if(!user) {
+        res.status(401);
+        throw new Error("[error] user not found");
+    }
+
+    if(game.user.toString() !== user.id) {
+        res.status(401);
+        throw new Error("[error] user not authorized")
+    }
+
+    const updatedGame = await Game.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
     });
 
@@ -57,14 +71,26 @@ const updateGame = asyncHandler(async (req, res) => {
     @access         private
 */
 const deleteGame = asyncHandler(async (req, res) => {
-    const game = await game.findById(req.params.id);
+    const game = await Game.findById(req.params.id);
 
     if(!game) {
         res.status(400);
         throw new Error("[error] game not found");
     }
 
-    const deletedGame = await game.findByIdAndDelete(req.params.id);
+    const user = await User.findById(req.user.id);
+
+    if(!user) {
+        res.status(401);
+        throw new Error("[error] user not found");
+    }
+
+    if(game.user.toString() !== user.id) {
+        res.status(401);
+        throw new Error("[error] user not authorized")
+    }
+
+    const deletedGame = await Game.findByIdAndDelete(req.params.id);
 
     res.status(200).send(deletedGame);
 });
