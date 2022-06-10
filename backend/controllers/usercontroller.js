@@ -5,9 +5,9 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/usermodel");
 
 /*
-    @description    register new user
+    @description    Register new user
     @route          POST /api/users
-    @access         public
+    @access         Public
 */
 const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
@@ -47,9 +47,9 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 /*
-    @description    authenticate user
+    @description    Authenticate user
     @route          POST /api/users/login
-    @access         public
+    @access         Public
 */
 const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
@@ -70,9 +70,9 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 /*
-    @description    get user data
+    @description    Get user data
     @route          GET /api/users/me
-    @access         private
+    @access         Private
 */
 const getUserData = asyncHandler(async (req, res) => {
     const { _id, name, email } = await User.findById(req.user.id);

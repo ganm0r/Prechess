@@ -4,9 +4,9 @@ const Game = require("../models/gamemodel");
 const User = require("../models/usermodel");
 
 /*
-    @description    get games
+    @description    Get games
     @route          GET /api/games
-    @access         private
+    @access         Private
 */
 const getGames = asyncHandler(async (req, res) => {
     const games = await Game.find({ user: req.user.id });
@@ -15,9 +15,9 @@ const getGames = asyncHandler(async (req, res) => {
 });
 
 /*
-    @description    set game
+    @description    Set game
     @route          POST /api/games
-    @access         private
+    @access         Private
 */
 const setGame = asyncHandler(async (req, res) => {
     if(!req.body.text) {
@@ -34,9 +34,9 @@ const setGame = asyncHandler(async (req, res) => {
 });
 
 /*
-    @description    update game for id
+    @description    Update game for id
     @route          PUT /api/games/:id
-    @access         private
+    @access         Private
 */
 const updateGame = asyncHandler(async (req, res) => {
     const game = await Game.findById(req.params.id);
@@ -66,9 +66,9 @@ const updateGame = asyncHandler(async (req, res) => {
 });
 
 /*
-    @description    delete game for id
+    @description    Delete game for id
     @route          DELETE /api/games/:id
-    @access         private
+    @access         Private
 */
 const deleteGame = asyncHandler(async (req, res) => {
     const game = await Game.findById(req.params.id);
