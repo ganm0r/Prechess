@@ -1,25 +1,26 @@
+import React from "react";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import styled from "styled-components";
-
 import { MainContainer } from "./components/MainContainer";
-
-const Grid = styled.div`
-  display: grid;
-`;
-
-const Flex = styled.div`
-  display: flex;
-`;
+import { Navbar } from "./components/Navbar";
+import { Landing } from "./pages/Landing";
+import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
 
 const App = () => {
   return (
+    <React.Fragment>
       <Router>
         <MainContainer>
-          <Grid>
-            <h1>Prechess</h1>
-          </Grid>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={ <Landing /> } />
+            <Route path="/login" element={ <Login /> } />
+            <Route path="/register" element={ <Register /> } />
+          </Routes>
         </MainContainer>
       </Router>
+    </React.Fragment>
   );
 }
 
