@@ -16,9 +16,10 @@ const SubHeading = styled.h1`
   margin: 0%;
   font-weight: ${typography.fontWeights.semibold};
   font-family: ${typography.fonts.primary};
-  font-size: 36px;
+  font-size: 32px;
   color: ${colors.white};
   position: relative;
+  user-select: none;
 `;
 
 const Login = () => {
@@ -26,14 +27,14 @@ const Login = () => {
     <React.Fragment>
       <Grid
         style={{
-            gridTemplateColumns: "0.9fr 0.7fr",
+            gridTemplateColumns: "3fr 1fr",
             alignItems: "center",
             justifyItems: "center",
-            height: "95%",
+            height: "96%",
         }}
       >
         <Card 
-          gridTemplateRows={"repeat(4, 0.68fr)"}
+          gridTemplateRows={"repeat(4, 0.5fr)"}
         >
           <SubHeading>
             Hello again! Let's sign you in...
@@ -54,6 +55,15 @@ const Login = () => {
           />
           <Button children={"Yes, take me in!"} />
         </Card>
+        <img
+                src="/prechess.jpg"
+                alt="Mikhail Tal"
+                style={{
+                    width: "100%",
+                    height: "100%",
+                    pointerEvents: "none",
+                }}
+        />
       </Grid>
     </React.Fragment>
   );
