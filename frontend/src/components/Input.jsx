@@ -22,16 +22,18 @@ const StyledInputTitle = styled.p`
     color: ${colors.white};
     margin: 2%;
     margin-left: 0%;
+    user-select: none;
 `;
 
 const StyledInputInfo = styled.p`
     font-weight: ${typography.fontWeights.bold};
     font-family: ${typography.fonts.primary};
     color: ${colors.white};
-    font-size: 14px;
+    font-size: 11px;
     margin-top: 0;
     margin-bottom: 2%;
     padding-left: 6px;
+    user-select: none;
 `;
 
 const StyledInputField = styled.input`
