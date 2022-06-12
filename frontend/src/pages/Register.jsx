@@ -7,6 +7,11 @@ import { Card } from "../components/Card";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { register, reset } from "../features/auth/authSlice";
+import { HashLoader } from "react-spinners";
 
 const Grid = styled.div`
   display: grid;
@@ -31,13 +36,31 @@ const Form = styled.form`
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    username: "",
+    name: "",
     email: "",
     password: "",
     confirmPassword: ""
   });
 
-  const { username, email, password, confirmPassword } = formData;
+  const { name, email, password, confirmPassword } = formData;
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isSuccess, isError, message } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if(isError) {
+      toast.error(message);
+    }
+
+    if(isSuccess || user) {
+      navigate("/home");
+    }
+
+    dispatch(reset());
+
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (event) => {
     setFormData((prevState) => ({
@@ -48,6 +71,22 @@ const Register = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+
+    if(password !== confirmPassword) {
+      toast.error("Passwords do not match!");
+    } else {
+      const userData = {
+        name,
+        email,
+        password,
+      };
+
+      dispatch(register(userData));
+    }
+  }
+
+  if(isLoading) {
+    return <HashLoader color={colors.orange} />
   }
 
   return (
@@ -72,13 +111,13 @@ const Register = () => {
             <Form onSubmit={onSubmit} >
               <Input
                 type={"text"}
-                title={"Username"}
+                title={"name"}
                 placeholder={"Magunus Carlsen"}
                 required={true}
-                info={"Your username associated with this account!"}
-                id={"username"}
-                name={"username"}
-                value={username}
+                info={"Your name associated with this account!"}
+                id={"name"}
+                name={"name"}
+                value={name}
                 onChange={onChange}
               />
               <Input
