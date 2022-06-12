@@ -23,6 +23,7 @@ const SubHeading = styled.h1`
   position: relative;
   cursor: pointer;
   role: button;
+  user-select: none;
 `;
 
 const Navbar = () => {
