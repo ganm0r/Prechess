@@ -39,7 +39,7 @@ const Login = () => {
             Hello again! Let's sign you in...
           </SubHeading>
           <Input
-            type={"text"}
+            type={"email"}
             title={"Email Address"}
             placeholder={"carlsenmagnus@gmail.com"}
             required={true}
