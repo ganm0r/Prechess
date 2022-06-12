@@ -58,7 +58,7 @@ const StyledInputField = styled.input`
     }
 `;
 
-const Input = ({ title, type, placeholder, required, info }) => {
+const Input = ({ title, type, placeholder, required, info, id, name, value, className, onChange }) => {
   return (
     <React.Fragment>
         <Grid
@@ -82,6 +82,11 @@ const Input = ({ title, type, placeholder, required, info }) => {
                 spellCheck="false"
                 autoComplete="off"
                 required={required}
+                id={id}
+                name={name}
+                className={className}
+                value={value}
+                onChange={onChange}
             ></StyledInputField>
         </Grid>
     </React.Fragment>

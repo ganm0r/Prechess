@@ -24,12 +24,14 @@ const StyledButton = styled.button`
     }
 `;
 
-const Button = ({ children, onClick, disabled, cursor, to }) => {
+const Button = ({ children, onClick, disabled, cursor, to, type, className }) => {
     return (
         <StyledButton
+            type={type}
             onClick={onClick}
             disabled={disabled}
             style={{ cursor: cursor }}
+            className={className}
         >
             {children}
         </StyledButton>
