@@ -18,6 +18,7 @@ const Heading = styled.h1`
   font-size: 92px;
   line-height: 88px;
   color: ${colors.white};
+  user-select: none;
 `;
 
 const SubHeading = styled.h3`
@@ -27,6 +28,7 @@ const SubHeading = styled.h3`
   font-size: 56px;
   line-height: 64px;
   color: ${colors.white};
+  user-select: none;
 `;
 
 const Landing = () => {
@@ -78,6 +80,7 @@ const Landing = () => {
                     width: "auto",
                     height: "88%",
                     marginTop: "13%",
+                    pointerEvents: "none",
                 }}
             />
         </Grid>
