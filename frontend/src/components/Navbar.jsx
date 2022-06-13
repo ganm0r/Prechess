@@ -35,11 +35,30 @@ const SubHeading = styled.h1`
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const { user } = useSelector((state) => state.auth);
+
+    const onLogout = () => {
+        dispatch(logout());
+        dispatch(reset());
+        navigate("/");
+    }
 
     return (
         <React.Fragment>
             <StyledNavbar>
                 <SubHeading onClick={() => navigate("/")}>PreChess</SubHeading>
+                {user &&
+                <SubHeading
+                    onClick={onLogout}
+                    style={{
+                        fontSize: "32px",
+                        lineHeight: "42px",
+                    }}
+                >
+                Logout 👋
+                </SubHeading>}
             </StyledNavbar>
         </React.Fragment>
     );
