@@ -7,6 +7,11 @@ import { Card } from "../components/Card";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { login, reset } from "../features/auth/authSlice";
+import { HashLoader } from "react-spinners";
 
 const Grid = styled.div`
   display: grid;
@@ -37,6 +42,24 @@ const Login = () => {
 
   const { email, password } = formData;
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isSuccess, isError, message } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if(isError) {
+      toast.error(message);
+    }
+
+    if(isSuccess || user) {
+      navigate("/home");
+    }
+
+    dispatch(reset());
+
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
   const onChange = (event) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -46,16 +69,28 @@ const Login = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+
+    const userData = {
+      email,
+      password,
+    };
+
+    dispatch(login(userData));
+  }
+
+  if(isLoading) {
+    return <HashLoader color={colors.orange} />
   }
 
   return (
     <React.Fragment>
       <Grid
         style={{
-            gridTemplateColumns: "3fr 1fr",
             alignItems: "center",
             justifyItems: "center",
             height: "96%",
+            marginLeft: "5%",
+            marginRight: "5%",
         }}
       >
         <Card>
@@ -97,15 +132,6 @@ const Login = () => {
             </Form>
           </Grid>
         </Card>
-        <img
-                src="/prechess.jpg"
-                alt="Mikhail Tal"
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    pointerEvents: "none",
-                }}
-        />
       </Grid>
     </React.Fragment>
   );
