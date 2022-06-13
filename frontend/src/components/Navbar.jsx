@@ -10,6 +10,7 @@ import { logout, reset } from "../features/auth/authSlice";
 const StyledNavbar = styled.div`
     display: flex;
     align-items: center;
+    justify-content: space-between;
     max-width: 100vw;
     background-color: ${colors.black};
     padding: 8px 36px;
