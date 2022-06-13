@@ -93,10 +93,11 @@ const Register = () => {
     <React.Fragment>
       <Grid
         style={{
-            gridTemplateColumns: "3fr 1fr",
             alignItems: "center",
             justifyItems: "center",
             height: "96%",
+            marginLeft: "5%",
+            marginRight: "5%",
         }}
       >
         <Card>
@@ -160,15 +161,6 @@ const Register = () => {
             </Form>
           </Grid>
         </Card>
-        <img
-          src="/prechess.jpg"
-          alt="Mikhail Tal"
-          style={{
-              width: "100%",
-              height: "100%",
-              pointerEvents: "none",
-          }}
-        />
       </Grid>
     </React.Fragment>
   );
