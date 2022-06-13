@@ -27,6 +27,10 @@ const SubHeading = styled.h1`
   cursor: pointer;
   role: button;
   user-select: none;
+
+  &:active {
+    transform: scale(0.98);
+  }
 `;
 
 const Navbar = () => {
