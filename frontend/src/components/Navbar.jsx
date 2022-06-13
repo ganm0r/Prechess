@@ -4,6 +4,8 @@ import colors from "../theme/colors";
 import typography from "../theme/typography";
 
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from  "react-redux";
+import { logout, reset } from "../features/auth/authSlice";
 
 const StyledNavbar = styled.div`
     display: flex;
