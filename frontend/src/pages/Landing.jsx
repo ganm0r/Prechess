@@ -39,7 +39,8 @@ const Landing = () => {
         <Grid
             style={{
                 gridTemplateColumns: "0.9fr 0.7fr",
-                alignItems: "flex-start",
+                alignItems: "center",
+                justifyContent: "center",
             }}
         >
             <Grid
@@ -79,7 +80,7 @@ const Landing = () => {
                 style={{
                     width: "auto",
                     height: "88%",
-                    marginTop: "13%",
+                    marginTop: "14%",
                     pointerEvents: "none",
                 }}
             />
