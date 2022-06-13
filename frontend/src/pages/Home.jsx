@@ -3,6 +3,10 @@ import styled from "styled-components";
 import colors from "../theme/colors";
 import typography from "../theme/typography";
 
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 const Grid = styled.div`
   display: grid;
 `;
@@ -18,6 +22,16 @@ const SubHeading = styled.h1`
 `;
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if(!user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
+  
   return (
     <React.Fragment>
       <Grid
