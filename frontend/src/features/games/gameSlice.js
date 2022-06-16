@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import gameService from "./gameService";
 
 const initialState = {
     games: [],
@@ -68,7 +69,7 @@ export const deleteGame = createAsyncThunk(
     }
 );
 
-export const gameSlice = createAsyncThunk({
+export const gameSlice = createSlice({
     name: "game",
     initialState,
     reducers: {
