@@ -50,48 +50,6 @@ const Flex = styled.div`
 `;
 
 const GameModal = ({ isOpen, onClose }) => {
-    const [formData, setFormData] = useState({
-        name: "",
-        type: "",
-        game: "",
-    });
-
-    const { name, type, game } = formData;
-
-    const dispatch = useDispatch();
-
-    //const { game, isLoading, isSuccess, isError, message } = useSelector((state) => state.game);
-
-    const onChange = (event) => {
-        setFormData((prevState) => ({
-          ...prevState,
-          [event.target.name]: event.target.value,
-        }))
-    };
-
-    const onSubmit = (event) => {
-        event.preventDefault();
-
-        const gameData = {
-          name,
-          type,
-          game,
-        };
-    }
-
-    // if(isLoading) {
-    //     return (
-    //       <Flex
-    //         style={{
-    //           alignItems: "center",
-    //           justifyContent: "center"
-    //         }}
-    //       >
-    //         <HashLoader color={colors.orange} />
-    //       </Flex>
-    //     )
-    //   }
-
     if(!isOpen) return null;
 
     return (
@@ -100,44 +58,6 @@ const GameModal = ({ isOpen, onClose }) => {
                 <StyledModal>
                     <StyledModalForm>
                         <Button onClick={onClose} children={"Close"}/>
-                        <Input
-                            type={"text"}
-                            title={"Name"}
-                            placeholder={"The Evans Gambit"}
-                            required={true}
-                            info={"Maximum 30 characters"}
-                            id={"name"}
-                            name={"name"}
-                            value={name}
-                            onChange={onChange}
-                        />
-                        <Input
-                            type={"text"}
-                            title={"Type"}
-                            placeholder={"The Evans Gambit"}
-                            required={true}
-                            info={"Maximum 30 characters"}
-                            id={"name"}
-                            name={"name"}
-                            value={name}
-                            onChange={onChange}
-                        />
-                        <Input
-                            type={"password"}
-                            title={"PNG"}
-                            placeholder={"IAmWorldChamp@2022"}
-                            required={true}
-                            info={"Your strong password please!"}
-                            id={"password"}
-                            name={"password"}
-                            value={game}
-                            onChange={onChange}
-                        />
-                        <Button
-                            type={"submit"}
-                        >
-                            Test<span style={{ paddingLeft: "4px" }}>🪴</span>
-                        </Button>
                     </StyledModalForm>
                 </StyledModal>
             </Overlay>

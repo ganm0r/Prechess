@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { GameCard } from "../components/GameCard";
-import { GameModal } from "../components/GameModal";
+import { GameForm } from "../components/GameForm";
 
 const Grid = styled.div`
   display: grid;
@@ -160,7 +160,7 @@ const Home = () => {
             </Flex>
           </Grid>
         ))}
-        <GameModal
+        <GameForm
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
         />
