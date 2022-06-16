@@ -18,11 +18,15 @@ const Grid = styled.div`
   position: relative;
 `;
 
+const Flex = styled.div`
+  display: flex;
+`;
+
 const SubHeading = styled.h1`
   margin: 0%;
-  font-weight: ${typography.fontWeights.semibold};
+  font-weight: ${typography.fontWeights.black};
   font-family: ${typography.fonts.primary};
-  font-size: 32px;
+  font-size: 28px;
   color: ${colors.white};
   position: relative;
   user-select: none;
@@ -86,7 +90,16 @@ const Register = () => {
   }
 
   if(isLoading) {
-    return <HashLoader color={colors.orange} />
+    return (
+      <Flex
+        style={{
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        <HashLoader color={colors.orange} />
+      </Flex>
+    )
   }
 
   return (
@@ -115,7 +128,7 @@ const Register = () => {
                 title={"name"}
                 placeholder={"Magunus Carlsen"}
                 required={true}
-                info={"Your name associated with this account!"}
+                info={"Your awesome username for this account!"}
                 id={"name"}
                 name={"name"}
                 value={name}
@@ -126,7 +139,7 @@ const Register = () => {
                 title={"Email Address"}
                 placeholder={"carlsenmagnus@gmail.com"}
                 required={true}
-                info={"Your email associated with this account!"}
+                info={"Your working email for this account!"}
                 id={"email"}
                 name={"email"}
                 value={email}
@@ -148,16 +161,17 @@ const Register = () => {
                 title={"Confirm Password"}
                 placeholder={"IAmWorldChamp@2022"}
                 required={true}
-                info={"Your strong password please!"}
+                info={"Confirm your strong password please!"}
                 id={"confirmPassword"}
                 name={"confirmPassword"}
                 value={confirmPassword}
                 onChange={onChange}
               />
-              <Button 
-                children={"Yes, take me in!"} 
+              <Button
                 type={"submit"}
-              />
+              >
+                Let's Go<span style={{ paddingLeft: "4px" }}>🌱</span>
+              </Button>
             </Form>
           </Grid>
         </Card>
