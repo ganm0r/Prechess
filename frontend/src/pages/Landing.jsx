@@ -70,8 +70,8 @@ const Landing = () => {
                         marginTop: "5%",
                     }}
                 >
-                    <Button children={"Sign In"} onClick={() => navigate("/login")} />
-                    <Button children={"Sign Up"} onClick={() => navigate("/register")} />
+                    <Button onClick={() => navigate("/login")} >Sign In<span style={{ paddingLeft: "8px" }}>🪴</span></Button>
+                    <Button onClick={() => navigate("/register")} >Sign Up<span style={{ paddingLeft: "8px" }}>🌱</span></Button>
                 </Grid>
             </Grid>
             <img
