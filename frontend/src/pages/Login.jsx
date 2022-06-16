@@ -18,11 +18,17 @@ const Grid = styled.div`
   position: relative;
 `;
 
+const Flex = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+`;
+
 const SubHeading = styled.h1`
   margin: 0%;
-  font-weight: ${typography.fontWeights.semibold};
+  font-weight: ${typography.fontWeights.black};
   font-family: ${typography.fonts.primary};
-  font-size: 32px;
+  font-size: 28px;
   color: ${colors.white};
   position: relative;
   user-select: none;
@@ -79,7 +85,16 @@ const Login = () => {
   }
 
   if(isLoading) {
-    return <HashLoader color={colors.orange} />
+    return (
+      <Flex
+        style={{
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        <HashLoader color={colors.orange} />
+      </Flex>
+    )
   }
 
   return (
@@ -125,10 +140,11 @@ const Login = () => {
                 value={password}
                 onChange={onChange}
               />
-              <Button 
-                children={"Yes, take me in!"} 
+              <Button
                 type={"submit"}
-              />
+              >
+                Let's Go<span style={{ paddingLeft: "4px" }}>🪴</span>
+              </Button>
             </Form>
           </Grid>
         </Card>
