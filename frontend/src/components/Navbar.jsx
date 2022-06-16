@@ -7,6 +7,13 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from  "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 
+const Flex = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 424px;
+`;
+
 const StyledNavbar = styled.div`
     display: flex;
     align-items: center;
@@ -28,6 +35,10 @@ const SubHeading = styled.h1`
   role: button;
   user-select: none;
 
+  &:hover {
+    color: ${colors.grey};
+  }
+
   &:active {
     transform: scale(0.98);
   }
@@ -47,19 +58,23 @@ const Navbar = () => {
 
     return (
         <React.Fragment>
-            <StyledNavbar>
-                <SubHeading onClick={() => navigate("/")}>PreChess</SubHeading>
-                {user &&
-                <SubHeading
-                    onClick={onLogout}
-                    style={{
-                        fontSize: "32px",
-                        lineHeight: "42px",
-                    }}
-                >
-                Logout 👋
-                </SubHeading>}
-            </StyledNavbar>
+            {user ? (
+                <StyledNavbar>
+                    <SubHeading>PreChess<span style={{ paddingLeft: "8px" }}>🎓</span></SubHeading>
+                    <Flex>
+                        <SubHeading>{user && user.name}<span style={{ paddingLeft: "8px" }}>💕</span></SubHeading>
+                        <SubHeading
+                            onClick={onLogout}
+                        >
+                        Logout<span style={{ paddingLeft: "8px" }}>🚪</span>
+                        </SubHeading>
+                    </Flex>
+                </StyledNavbar>
+            ) : (
+                <StyledNavbar>
+                    <SubHeading onClick={() => navigate("/")}>PreChess<span style={{ paddingLeft: "8px" }}>🎓</span></SubHeading>
+                </StyledNavbar>
+            )}
         </React.Fragment>
     );
 };
