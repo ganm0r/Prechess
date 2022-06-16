@@ -21,13 +21,14 @@ const StyledCard = styled.div`
     }
 `;
 
-const GameCard = ({ children, gridTemplateRows }) => {
+const GameCard = ({ children, gridTemplateRows, gameTitle, onGameCardClick }) => {
   return (
     <React.Fragment>
         <StyledCard
             style={{
                 gridTemplateRows: gridTemplateRows,
             }}
+            onClick={onGameCardClick}
         >
             {children}
         </StyledCard>
