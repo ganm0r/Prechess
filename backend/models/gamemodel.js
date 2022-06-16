@@ -7,7 +7,15 @@ const gameSchema = mongoose.Schema(
             required: true,
             ref: "User",
         },
-        text: {
+        name: {
+            type: String,
+            required: [true, "please add some text"],
+        },
+        type: {
+            type: String,
+            required: [true, "please add some text"],
+        },
+        game: {
             type: String,
             required: [true, "please add some text"],
         },

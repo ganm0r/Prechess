@@ -26,8 +26,10 @@ const setGame = asyncHandler(async (req, res) => {
     }
 
     const game = await Game.create({
-        text: req.body.text,
         user: req.user.id,
+        name: req.body.name,
+        type: req.body.type,
+        game: req.body.game,
     })
 
     res.status(200).send(game);
