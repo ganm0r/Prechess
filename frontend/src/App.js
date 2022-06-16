@@ -8,6 +8,8 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { Home } from "./pages/Home";
 import { ToastContainer } from "react-toastify";
+import { Masthead } from "./components/Masthead";
+
 import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
@@ -25,6 +27,12 @@ const App = () => {
         </MainContainer>
       </Router>
       <ToastContainer />
+      <Masthead 
+        href="https://github.com/ganm0r/learn-mern"
+        target="_blank"
+      >
+        Crafted with 💖 by<span style={{ fontFamily: "cursive", fontWeight: "bolder", fontSize: "28px", paddingLeft: "8.5px"}}>Gandharv</span>
+      </Masthead>
     </React.Fragment>
   );
 }
