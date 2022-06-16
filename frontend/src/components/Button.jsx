@@ -19,6 +19,10 @@ const StyledButton = styled.button`
     cursor: pointer;
     margin-top: 7%;
 
+    &:hover {
+        opacity: 0.8;
+    }
+
     &:active {
         transform: scale(0.98);
     }
