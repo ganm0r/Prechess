@@ -3,10 +3,11 @@ import styled from "styled-components";
 import colors from "../theme/colors";
 import typography from "../theme/typography";
 
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { GameCard } from "../components/GameCard";
+import { GameModal } from "../components/GameModal";
 
 const Grid = styled.div`
   display: grid;
@@ -79,6 +80,9 @@ const GAMES = [
 // Max character count for game name = 30
 
 const Home = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalData, setModalData] = useState({});
+
   const navigate = useNavigate();
 
   const { user } = useSelector((state) => state.auth);
@@ -117,11 +121,18 @@ const Home = () => {
                 gap: "1.2%",
                 height: "auto",
                 overflow: "scroll",
+                scrollbarWidth: "thin",
               }}
             >
               {GAMES.map((game) => (
                 <GameCard
                   gridTemplateRows={"repeat(2, 1fr)"}
+                  key={game.name}
+                  gameTitle={game.name}
+                  onGameCardClick={() => {
+                    setModalData(game);
+                    setIsModalOpen(true);
+                  }}
                 >
                   <img
                     src="/prechess.jpg"
@@ -149,6 +160,10 @@ const Home = () => {
             </Flex>
           </Grid>
         ))}
+        <GameModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
       </Grid>
     </React.Fragment>
   );
