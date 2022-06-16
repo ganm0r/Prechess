@@ -16,7 +16,7 @@ const Grid = styled.div`
 const StyledInputTitle = styled.p`
     font-weight: ${typography.fontWeights.black};
     font-family: ${typography.fonts.primary};
-    font-size: 20px;
+    font-size: 18px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: ${colors.white};
@@ -29,11 +29,12 @@ const StyledInputInfo = styled.p`
     font-weight: ${typography.fontWeights.bold};
     font-family: ${typography.fonts.primary};
     color: ${colors.white};
-    font-size: 11px;
+    font-size: 12px;
     margin-top: 0;
     margin-bottom: 2%;
     padding-left: 6px;
     user-select: none;
+    text-transform: none;
 `;
 
 const StyledInputField = styled.input`
@@ -73,7 +74,9 @@ const Input = ({ title, type, placeholder, required, info, id, name, value, clas
                     flexDirection: "row",
                 }}
             >
-                <FaInfoCircle />
+                <FaInfoCircle style={{
+                    paddingTop: "1px",
+                }} />
                 <StyledInputInfo>{info}</StyledInputInfo>
             </Flex>
             <StyledInputField
