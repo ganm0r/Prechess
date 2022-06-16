@@ -7,7 +7,7 @@ import typography from "../theme/typography";
 const StyledButton = styled.button`
     background-color: ${colors.orange};
     font-weight: ${typography.fontWeights.black};
-    font-size: 24px;
+    font-size: 22px;
     box-sizing: border-box;
     color: white;
     letter-spacing: 0.15em;
