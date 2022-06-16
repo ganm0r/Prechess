@@ -10,6 +10,15 @@ const StyledCard = styled.div`
     margin-bottom: 22px;
     min-width: 200px;
     max-height: 200px;
+    role: button;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &:active {
+        transform: scale(0.98);
+    }
 `;
 
 const GameCard = ({ children, gridTemplateRows }) => {
