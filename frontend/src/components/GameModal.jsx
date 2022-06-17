@@ -5,10 +5,6 @@ import typography from "../theme/typography";
 
 import { Input } from "./Input";
 import { Button } from "./Button";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import { HashLoader } from "react-spinners";
 
 const Overlay = styled.div`
     position: fixed;
@@ -35,12 +31,10 @@ const StyledModal = styled.div`
     max-height: 720px;
 `;
 
-const StyledModalForm = styled.form`
+const Grid = styled.div`
   display: grid;
   position: relative;
   grid-template-rows: repeat(3, 0.5fr) 3fr 0.5fr;
-  margin: 2%;
-  margin-top: 0;
 `;
 
 const Flex = styled.div`
@@ -49,7 +43,7 @@ const Flex = styled.div`
   height: 100%;
 `;
 
-const GameModal = ({ isOpen, onClose }) => {
+const GameModal = ({ isOpen, onClose, gameData }) => {
     if(!isOpen) return null;
 
     return (
@@ -57,7 +51,7 @@ const GameModal = ({ isOpen, onClose }) => {
             <Overlay>
                 <StyledModal>
                     <StyledModalForm>
-                        <Button onClick={onClose} children={"Close"}/>
+                        <Button onClick={onClose} children={"Close"} />
                     </StyledModalForm>
                 </StyledModal>
             </Overlay>
