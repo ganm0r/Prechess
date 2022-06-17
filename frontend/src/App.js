@@ -25,14 +25,9 @@ const App = () => {
             <Route path="/home" element={ <Home /> } />
           </Routes>
         </MainContainer>
+        <Masthead />
       </Router>
       <ToastContainer />
-      <Masthead 
-        href="https://github.com/ganm0r/learn-mern"
-        target="_blank"
-      >
-        Crafted with 💖 by<span style={{ fontFamily: "cursive", fontWeight: "bolder", fontSize: "28px", paddingLeft: "8.5px"}}>Gandharv</span>
-      </Masthead>
     </React.Fragment>
   );
 }
