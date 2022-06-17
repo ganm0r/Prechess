@@ -9,12 +9,17 @@ const container = document.getElementById('root');
 const root = createRoot(container);
 
 const GlobalStyles = createGlobalStyle`
+  html {
+    scrollbar-width: none;
+  }
+
   body {
     margin: 0;
     padding: 0;
     font-family: 'Nunito Sans';
     letter-spacing: 1.5px;
     overflow: hidden;
+    overflow-y: scroll;
   }
 `;
 
