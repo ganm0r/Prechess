@@ -5,6 +5,7 @@ import typography from "../theme/typography";
 
 import { Input } from "./Input";
 import { Button } from "./Button";
+import { GrClose } from "react-icons/gr";
 
 const Overlay = styled.div`
     position: fixed;
@@ -12,7 +13,7 @@ const Overlay = styled.div`
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 10;
 `;
 
@@ -26,37 +27,72 @@ const StyledModal = styled.div`
     scrollbar-width: none;
     background-color: ${colors.green};
     border-radius: 8px;
-    min-width: 720px;
+    min-width: 500px;
     max-width: 500px;
-    max-height: 720px;
+    min-height: 600px;
 `;
 
 const Grid = styled.div`
   display: grid;
   position: relative;
   grid-template-rows: repeat(3, 0.5fr) 3fr 0.5fr;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Flex = styled.div`
   display: flex;
-  width: 100%;
-  height: 100%;
+  min-width: 480px;
+  margin: 0;
+  margin-top: 2%;
 `;
 
-const GameModal = ({ isOpen, onClose, gameData }) => {
+const SubHeading = styled.h1`
+  margin: 0;
+  font-weight: ${typography.fontWeights.black};
+  font-size: 32px;
+  position: relative;
+  user-select: none;
+`;
+
+const GameModal = ({ isOpen, onClose, gameData, title }) => {
     if(!isOpen) return null;
 
     return (
         <React.Fragment>
             <Overlay>
                 <StyledModal>
-                    <StyledModalForm>
-                        <Button onClick={onClose} children={"Close"} />
-                    </StyledModalForm>
+                    <Grid>
+                        <Flex
+                            style={{
+                                backgroundColor: `${colors.orange}`,
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                borderRadius: "8px",
+                            }}
+                        >
+                            <SubHeading
+                                style={{
+                                    margin: "2%",
+                                }}
+                            >
+                                {title}
+                            </SubHeading>
+                            <GrClose
+                                size={"32px "}
+                                style={{
+                                    margin: "2%",
+                                    color: `${colors.black}`,
+                                }}
+                                onClick={onClose}
+                                cursor="pointer"
+                            />
+                        </Flex>
+                    </Grid>
                 </StyledModal>
             </Overlay>
         </React.Fragment>
-    )
+    );
 };
 
 export { GameModal };
