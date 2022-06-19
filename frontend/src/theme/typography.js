@@ -1,6 +1,7 @@
 const typography = {
   fonts: {
-    primary: "Nunito Sans, sans-serif",
+    primary: "Nunito Sans",
+    secondary: "Pacifico",
   },
   fontWeights: {
     thin: 100,
