@@ -3,10 +3,10 @@ import colors from "../theme/colors";
 import typography from "../theme/typography";
 
 const StyledMasthead = styled.a`
-  font-weight: ${typography.fontWeights.light};
-  font-family: Pacifico;
+  font-weight: ${typography.fontWeights.black};
+  font-family: ${typography.fonts.primary};
   font-size: 18px;
-  color: ${colors.grey};
+  color: ${colors.white};
   user-select: none;
   text-decoration: none;
   margin: auto;
