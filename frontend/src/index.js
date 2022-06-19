@@ -9,10 +9,6 @@ const container = document.getElementById('root');
 const root = createRoot(container);
 
 const GlobalStyles = createGlobalStyle`
-  html {
-    scrollbar-width: none;
-  }
-
   body {
     margin: 0;
     padding: 0;
@@ -20,6 +16,12 @@ const GlobalStyles = createGlobalStyle`
     letter-spacing: 1.5px;
     overflow: hidden;
     overflow-y: scroll;
+    scrollbar-width: none;
+  }
+
+  body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
   }
 `;
 
