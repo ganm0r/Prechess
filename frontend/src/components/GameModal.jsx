@@ -3,8 +3,6 @@ import styled from "styled-components";
 import colors from "../theme/colors";
 import typography from "../theme/typography";
 
-import { Input } from "./Input";
-import { Button } from "./Button";
 import { GrClose } from "react-icons/gr";
 
 const Overlay = styled.div`
@@ -30,6 +28,11 @@ const StyledModal = styled.div`
     min-width: 500px;
     max-width: 500px;
     min-height: 600px;
+
+    ::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
 `;
 
 const Grid = styled.div`
