@@ -26,10 +26,10 @@ const StyledInputTitle = styled.p`
 `;
 
 const StyledInputInfo = styled.p`
-    font-weight: ${typography.fontWeights.bold};
+    font-weight: ${typography.fontWeights.black};
     font-family: ${typography.fonts.primary};
     color: ${colors.white};
-    font-size: 12px;
+    font-size: 13px;
     margin-top: 0;
     margin-bottom: 2%;
     padding-left: 6px;
