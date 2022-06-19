@@ -11,6 +11,7 @@ const StyledCard = styled.div`
     min-width: 200px;
     max-height: 200px;
     role: button;
+    cursor: pointer;
 
     &:hover {
         opacity: 0.8;
