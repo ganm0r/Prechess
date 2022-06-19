@@ -11,7 +11,7 @@ const Flex = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-width: 424px;
+    min-width: 372px;
 `;
 
 const StyledNavbar = styled.div`
@@ -25,23 +25,23 @@ const StyledNavbar = styled.div`
 `;
 
 const SubHeading = styled.h1`
-  margin: 0;
-  font-weight: ${typography.fontWeights.black};
-  font-size: 36px;
-  line-height: 48px;
-  color: ${colors.white};
-  position: relative;
-  cursor: pointer;
-  role: button;
-  user-select: none;
+    margin: 0;
+    font-weight: ${typography.fontWeights.black};
+    font-size: 36px;
+    line-height: 48px;
+    color: ${colors.white};
+    position: relative;
+    cursor: pointer;
+    role: button;
+    user-select: none;
 
-  &:hover {
-    color: ${colors.grey};
-  }
+    &:hover {
+        color: ${colors.grey};
+    }
 
-  &:active {
-    transform: scale(0.98);
-  }
+    &:active {
+        transform: scale(0.98);
+    }
 `;
 
 const Navbar = () => {
@@ -60,9 +60,9 @@ const Navbar = () => {
         <React.Fragment>
             {user ? (
                 <StyledNavbar>
-                    <SubHeading>PreChess<span style={{ paddingLeft: "8px" }}>🎓</span></SubHeading>
+                    <SubHeading>{user && user.name}<span style={{ paddingLeft: "8px" }}>💕</span></SubHeading>
                     <Flex>
-                        <SubHeading>{user && user.name}<span style={{ paddingLeft: "8px" }}>💕</span></SubHeading>
+                    <SubHeading>Create<span style={{ paddingLeft: "8px" }}>✨</span></SubHeading>
                         <SubHeading
                             onClick={onLogout}
                         >
