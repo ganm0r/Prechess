@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { GameCard } from "../components/GameCard";
-import { GameForm } from "../components/GameForm";
+import { GameModal } from "../components/GameModal";
 
 const Grid = styled.div`
   display: grid;
@@ -28,7 +28,7 @@ const SubHeading = styled.h1`
 
 const GameHeading = styled.h1`
   font-weight: ${typography.fontWeights.black};
-  font-family: monospace;
+  font-family: ${typography.fonts.primary};
   font-size: 16px;
   color: ${colors.white};
   position: relative;
@@ -120,7 +120,7 @@ const Home = () => {
                 flexDirection: "row",
                 gap: "1.2%",
                 height: "auto",
-                overflow: "scroll",
+                overflowX: "scroll",
                 scrollbarWidth: "thin",
               }}
             >
@@ -153,16 +153,18 @@ const Home = () => {
                       marginLeft: "5%",
                     }}
                   >
-                    <GameHeading> 🎯 {game.name} </GameHeading>
+                    <GameHeading style={{ marginRight: "5%", }}> 🎯 {game.name} </GameHeading>
                   </Flex>
                 </GameCard>
               ))}
             </Flex>
           </Grid>
         ))}
-        <GameForm
+        <GameModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
+          title={"My creations"}
+          gameData={{modalData}}
         />
       </Grid>
     </React.Fragment>
