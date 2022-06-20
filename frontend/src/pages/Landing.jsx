@@ -33,6 +33,10 @@ const SubHeading = styled.h3`
   user-select: none;
 `;
 
+const Image = styled.img`
+  pointer-events: none;
+`;
+
 const Landing = () => {
   const navigate = useNavigate();
 
@@ -84,14 +88,12 @@ const Landing = () => {
                     <Button onClick={() => navigate("/register")} >Sign Up<span style={{ paddingLeft: "8px" }}>🌱</span></Button>
                 </Grid>
             </Grid>
-            <img
+            <Image
                 src="/Vishy.png"
                 alt="Vishy Anand"
                 style={{
-                    width: "auto",
-                    height: "88%",
-                    marginTop: "14%",
-                    pointerEvents: "none",
+                    height: "90%",
+                    marginTop: "21%",
                 }}
             />
         </Grid>
