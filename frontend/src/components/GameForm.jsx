@@ -71,6 +71,11 @@ const SubHeading = styled.h1`
     user-select: none;
 `;
 
+const StyledOption = styled.option`
+    background-color: ${colors.black};
+    color: ${colors.white};
+`;
+
 const GAME_TYPES = [
     {
       type: "Opening",
@@ -167,7 +172,7 @@ const GameForm = ({ isOpen, onClose, gameData, title }) => {
                             onChange={onChange}
                         >
                             {GAME_TYPES.map((game) => (
-                                <option key={game.type} value={game.type}>{game.type}</option>
+                                <StyledOption key={game.type} value={game.type}>{game.type}</StyledOption>
                             ))}
                         </Select>
                         <Input
@@ -184,7 +189,7 @@ const GameForm = ({ isOpen, onClose, gameData, title }) => {
                         <Button
                             type={"submit"}
                         >
-                            Okay, add it!<span style={{ paddingLeft: "4px" }}>🪴</span>
+                            Okay!<span style={{ paddingLeft: "4px" }}>🚀</span>
                         </Button>
                     </StyledModalForm>
                 </StyledModal>
