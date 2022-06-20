@@ -4,6 +4,7 @@ import colors from "../theme/colors";
 import typography from "../theme/typography";
 
 import { GrClose } from "react-icons/gr";
+import { Button } from "./Button";
 
 const Overlay = styled.div`
     position: fixed;
@@ -25,9 +26,9 @@ const StyledModal = styled.div`
     scrollbar-width: none;
     background-color: ${colors.green};
     border-radius: 8px;
-    min-width: 500px;
-    max-width: 500px;
-    min-height: 600px;
+    min-width: 524px;
+    max-width: 524px;
+    min-height: 624px;
 
     ::-webkit-scrollbar {
         width: 0;
@@ -45,14 +46,21 @@ const Grid = styled.div`
 
 const Flex = styled.div`
   display: flex;
-  min-width: 480px;
+  max-width: 506px;
+  min-width: 506px;
   margin: 0;
   margin-top: 2%;
+
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 `;
 
 const SubHeading = styled.h1`
   margin: 0;
   font-weight: ${typography.fontWeights.black};
+  color: ${colors.white};
   font-size: 32px;
   position: relative;
   user-select: none;
@@ -72,14 +80,17 @@ const GameModal = ({ isOpen, onClose, gameData, title }) => {
                                 justifyContent: "space-between",
                                 alignItems: "center",
                                 borderRadius: "8px",
+                                marginBottom: "2%",
                             }}
                         >
                             <SubHeading
                                 style={{
                                     margin: "2%",
+                                    color: `${colors.black}`,
+                                    textTransform: "uppercase",
                                 }}
                             >
-                                {title}
+                                {title} 📚  
                             </SubHeading>
                             <GrClose
                                 size={"32px "}
@@ -90,6 +101,63 @@ const GameModal = ({ isOpen, onClose, gameData, title }) => {
                                 onClick={onClose}
                                 cursor="pointer"
                             />
+                        </Flex>
+                        <Flex
+                            style={{
+                                backgroundColor: `${colors.orange}`,
+                                borderRadius: "8px",
+                            }}
+                        >
+                            <SubHeading
+                            style={{
+                                margin: "2%",
+                            }}
+                            >
+                                {gameData.name}
+                            </SubHeading>
+                        </Flex>
+                        <Flex
+                            style={{
+                                backgroundColor: `${colors.orange}`,
+                                borderRadius: "8px",
+                            }}
+                        >
+                            <SubHeading
+                            style={{
+                                margin: "2%",
+                            }}
+                            >
+                                {gameData.type}
+                            </SubHeading>
+                        </Flex>
+                        <Flex
+                            style={{
+                                backgroundColor: `${colors.black}`,
+                                borderRadius: "8px",
+                                height: "100%",
+                                marginTop: "9%",
+                                zIndex: "1",
+                                overflow: "hidden",
+                                overflowY: "scroll",
+                            }}
+                        >
+                            <SubHeading
+                            style={{
+                                margin: "2%",
+                            }}
+                            >
+                                {gameData.game}
+                            </SubHeading>
+                        </Flex>
+                        <Flex
+                            style={{
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                marginBottom: "2%",
+                            }}
+                        >
+                            <Button>Update<span style={{ paddingLeft: "8px" }}>📝</span></Button>
+                            <Button>Delete<span style={{ paddingLeft: "8px" }}>🗑️</span></Button>
                         </Flex>
                     </Grid>
                 </StyledModal>
