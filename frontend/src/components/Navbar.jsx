@@ -6,6 +6,8 @@ import typography from "../theme/typography";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from  "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
+import { GameForm } from "./GameForm";
+import { useState } from "react";
 
 const Flex = styled.div`
     display: flex;
@@ -45,6 +47,9 @@ const SubHeading = styled.h1`
 `;
 
 const Navbar = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalData, setModalData] = useState({});
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -62,7 +67,13 @@ const Navbar = () => {
                 <StyledNavbar>
                     <SubHeading>{user && user.name}<span style={{ paddingLeft: "8px" }}>💕</span></SubHeading>
                     <Flex>
-                    <SubHeading>Create<span style={{ paddingLeft: "8px" }}>✨</span></SubHeading>
+                        <SubHeading
+                            onClick={() => {
+                                setIsModalOpen(true);
+                            }}
+                        >
+                            Create<span style={{ paddingLeft: "8px" }}>✨</span>
+                        </SubHeading>
                         <SubHeading
                             onClick={onLogout}
                         >
@@ -75,6 +86,12 @@ const Navbar = () => {
                     <SubHeading onClick={() => navigate("/")}>PreChess<span style={{ paddingLeft: "8px" }}>🎓</span></SubHeading>
                 </StyledNavbar>
             )}
+            <GameForm 
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                title={"Create"}
+                gameData={modalData}
+            />
         </React.Fragment>
     );
 };
