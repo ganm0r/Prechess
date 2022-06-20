@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { GameCard } from "../components/GameCard";
 import { GameModal } from "../components/GameModal";
+import { GameForm } from "../components/GameForm";
 
 const Grid = styled.div`
   display: grid;
@@ -17,12 +18,29 @@ const Flex = styled.div`
   display: flex;
 `;
 
+const FlexScroll = styled.div`
+  display: flex;
+
+  ::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${colors.black}; 
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${colors.grey};
+  }
+
+  scrollbar-color: ${colors.grey} ${colors.black};
+`;
+
 const SubHeading = styled.h1`
   margin: 0;
   font-weight: ${typography.fontWeights.black};
   font-size: 24px;
   color: ${colors.white};
-  position: relative;
   user-select: none;
 `;
 
@@ -31,7 +49,6 @@ const GameHeading = styled.h1`
   font-family: ${typography.fonts.primary};
   font-size: 16px;
   color: ${colors.white};
-  position: relative;
   user-select: none;
 `;
 
@@ -45,37 +62,55 @@ const HOME_ROWS = [
   {
     heading: "GAMES",
   },
-]
+];
 
 const GAMES = [
   {
     name: "London System",
+    type: "Opening",
+    game: "1. d4 d5 2. Nf3 Nf6 3. Bf4"
   },
   {
-    name: "French Defense",
+    name: "Tal v Kasparov 1992",
+    type: "Game",
+    game: "1. e4 c5 2. Nf3 d6 3.Bb5+ Nd7 4.d4 Nf6",
   },
   {
-    name: "Ruy Lopez",
+    name: "Tal v Kasparov 1992",
+    type: "Game",
+    game: "1. e4 c5 2. Nf3 d6 3.Bb5+ Nd7 4.d4 Nf6",
   },
   {
-    name: "Sicilian Defense",
+    name: "Tal v Kasparov 1992",
+    type: "Game",
+    game: "1. e4 c5 2. Nf3 d6 3.Bb5+ Nd7 4.d4 Nf6",
   },
   {
-    name: "Italian Game",
+    name: "Tal v Kasparov 1992",
+    type: "Game",
+    game: "1. e4 c5 2. Nf3 d6 3.Bb5+ Nd7 4.d4 Nf6",
   },
   {
-    name: "Caro-Kann Defense",
+    name: "Tal v Kasparov 1992",
+    type: "Game",
+    game: "1. e4 c5 2. Nf3 d6 3.Bb5+ Nd7 4.d4 Nf6",
   },
   {
-    name: "King's Gambit",
+    name: "Tal v Kasparov 1992",
+    type: "Game",
+    game: "1. e4 c5 2. Nf3 d6 3.Bb5+ Nd7 4.d4 Nf6",
   },
   {
-    name: "Alekhine's Defense",
+    name: "Tal v Kasparov 1992",
+    type: "Game",
+    game: "1. e4 c5 2. Nf3 d6 3.Bb5+ Nd7 4.d4 Nf6",
   },
   {
-    name: "Scandinavian Defense",
+    name: "Tal v Kasparov 1992",
+    type: "Game",
+    game: "1. e4 c5 2. Nf3 d6 3.Bb5+ Nd7 4.d4 Nf6",
   },
-]
+];
 
 // Max character count for game name = 30
 
@@ -101,8 +136,7 @@ const Home = () => {
           justifyContent: "flex-start",
           gridTemplateRows: "repeat(3, 1fr) 0.5fr",
           padding: "18px 36px",
-          gap: "6.4%",
-          marginTop: "2.7%",
+          gap: "5%",
         }}
       >
         {HOME_ROWS.map((content) => (
@@ -110,18 +144,20 @@ const Home = () => {
             style={{
               alignItems: "center",
               justifyContent: "center",
-              gridTemplateColumns: "0.5fr 3fr",
+              gridTemplateColumns: "1fr 5fr",
               margin: "0",
+              marginTop: "1.2%",
             }}
           >
             <SubHeading key={`${content.heading}`}>{content.heading}</SubHeading>
-            <Flex
+            <FlexScroll
               style={{
                 flexDirection: "row",
                 gap: "1.2%",
                 height: "auto",
                 overflowX: "scroll",
                 scrollbarWidth: "thin",
+                width: "82vw",
               }}
             >
               {GAMES.map((game) => (
@@ -157,14 +193,14 @@ const Home = () => {
                   </Flex>
                 </GameCard>
               ))}
-            </Flex>
+            </FlexScroll>
           </Grid>
         ))}
         <GameModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           title={"My creations"}
-          gameData={{modalData}}
+          gameData={modalData}
         />
       </Grid>
     </React.Fragment>
