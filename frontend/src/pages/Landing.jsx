@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import { Button } from "../components/Button";
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 import typography from "../theme/typography";
 import colors from "../theme/colors";
@@ -33,6 +35,14 @@ const SubHeading = styled.h3`
 
 const Landing = () => {
   const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if(user) {
+      navigate("/home");
+    }
+  }, [user, navigate]);
 
   return (
     <React.Fragment>
