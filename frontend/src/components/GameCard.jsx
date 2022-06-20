@@ -8,8 +8,10 @@ const StyledCard = styled.div`
     border-radius: 8px;
     box-sizing: border-box;
     margin-bottom: 22px;
+    max-width: 200px;
     min-width: 200px;
     max-height: 200px;
+    min-height: 200px;
     role: button;
     cursor: pointer;
 
