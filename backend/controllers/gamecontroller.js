@@ -20,7 +20,7 @@ const getGames = asyncHandler(async (req, res) => {
     @access         Private
 */
 const setGame = asyncHandler(async (req, res) => {
-    if(!req.body.text) {
+    if(!req.body) {
         res.status(400);
         throw new Error("[error] please add a text field");
     }
