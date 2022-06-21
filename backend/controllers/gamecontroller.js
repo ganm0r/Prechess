@@ -20,11 +20,6 @@ const getGames = asyncHandler(async (req, res) => {
     @access         Private
 */
 const setGame = asyncHandler(async (req, res) => {
-    if(!req.body) {
-        res.status(400);
-        throw new Error("[error] please add a text field");
-    }
-
     const game = await Game.create({
         user: req.user.id,
         name: req.body.name,
