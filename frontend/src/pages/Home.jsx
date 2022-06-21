@@ -5,10 +5,12 @@ import typography from "../theme/typography";
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { GameCard } from "../components/GameCard";
 import { GameModal } from "../components/GameModal";
 import { GameForm } from "../components/GameForm";
+import { getGames, reset } from "../features/games/gameSlice";
+import { HashLoader } from "react-spinners";
 
 const Grid = styled.div`
   display: grid;
@@ -16,6 +18,8 @@ const Grid = styled.div`
 
 const Flex = styled.div`
   display: flex;
+  width: 100%;
+  height: 100%;
 `;
 
 const FlexScroll = styled.div`
@@ -54,79 +58,54 @@ const GameHeading = styled.h1`
 
 const HOME_ROWS = [
   {
-    heading: "OPENINGS",
+    heading: "OPENINGS 📖",
   },
   {
-    heading: "PREPARATIONS",
+    heading: "PREPARATIONS ⚙️",
   },
   {
-    heading: "GAMES",
+    heading: "GAMES 🕹️",
   },
 ];
-
-const GAMES = [
-  {
-    name: "London System",
-    type: "Opening",
-    game: "1. d4 d5 2. Nf3 Nf6 3. Bf4"
-  },
-  {
-    name: "Tal v Kasparov 1992",
-    type: "Game",
-    game: "1. e4 c5 2. Nf3 d6 3.Bb5+ Nd7 4.d4 Nf6",
-  },
-  {
-    name: "Tal v Kasparov 1992",
-    type: "Game",
-    game: "1. e4 c5 2. Nf3 d6 3.Bb5+ Nd7 4.d4 Nf6",
-  },
-  {
-    name: "Tal v Kasparov 1992",
-    type: "Game",
-    game: "1. e4 c5 2. Nf3 d6 3.Bb5+ Nd7 4.d4 Nf6",
-  },
-  {
-    name: "Tal v Kasparov 1992",
-    type: "Game",
-    game: "1. e4 c5 2. Nf3 d6 3.Bb5+ Nd7 4.d4 Nf6",
-  },
-  {
-    name: "Tal v Kasparov 1992",
-    type: "Game",
-    game: "1. e4 c5 2. Nf3 d6 3.Bb5+ Nd7 4.d4 Nf6",
-  },
-  {
-    name: "Tal v Kasparov 1992",
-    type: "Game",
-    game: "1. e4 c5 2. Nf3 d6 3.Bb5+ Nd7 4.d4 Nf6",
-  },
-  {
-    name: "Tal v Kasparov 1992",
-    type: "Game",
-    game: "1. e4 c5 2. Nf3 d6 3.Bb5+ Nd7 4.d4 Nf6",
-  },
-  {
-    name: "Tal v Kasparov 1992",
-    type: "Game",
-    game: "1. e4 c5 2. Nf3 d6 3.Bb5+ Nd7 4.d4 Nf6",
-  },
-];
-
-// Max character count for game name = 30
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState({});
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
+  const { games, isLoading, isError, isSuccess, message } = useSelector((state) => state.games);
 
   useEffect(() => {
+    if(isError) {
+      console.log(message);
+    }
+
     if(!user) {
       navigate("/");
     }
-  }, [user, navigate]);
+
+    dispatch(getGames());
+
+    return () => {
+      dispatch(reset());
+    }
+  }, [user, navigate, dispatch, isError, message]);
+
+  if(isLoading) {
+    return (
+      <Flex
+        style={{
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        <HashLoader color={colors.orange} />
+      </Flex>
+    )
+  }
   
   return (
     <React.Fragment>
@@ -157,41 +136,45 @@ const Home = () => {
                 height: "auto",
                 overflowX: "scroll",
                 scrollbarWidth: "thin",
-                width: "82vw",
+                width: "80vw",
               }}
             >
-              {GAMES.map((game) => (
-                <GameCard
-                  gridTemplateRows={"repeat(2, 1fr)"}
-                  key={game.name}
-                  gameTitle={game.name}
-                  onGameCardClick={() => {
-                    setModalData(game);
-                    setIsModalOpen(true);
-                  }}
-                >
-                  <img
-                    src="/prechess.jpg"
-                    width="100%"
-                    height="auto"
-                    margin="0"
-                    alt="prechess"
-                    style={{
-                      borderTopLeftRadius: "8px",
-                      borderTopRightRadius: "8px",
-                      opacity: "0.85",
-                    }}
-                  />
-                  <Flex
-                    style={{
-                      justifyContent: "flex-start",
-                      width: "100%",
-                      marginLeft: "5%",
+              {games.map((game) => (
+                content.heading.includes(game.type.toUpperCase()) ? (
+                  <GameCard
+                    gridTemplateRows={"repeat(2, 1fr)"}
+                    key={game.name}
+                    gameTitle={game.name}
+                    onGameCardClick={() => {
+                      setModalData(game);
+                      setIsModalOpen(true);
                     }}
                   >
-                    <GameHeading style={{ marginRight: "5%", }}> 🎯 {game.name} </GameHeading>
-                  </Flex>
-                </GameCard>
+                    <img
+                      src="/prechess.jpg"
+                      width="100%"
+                      height="auto"
+                      margin="0"
+                      alt="prechess"
+                      style={{
+                        borderTopLeftRadius: "8px",
+                        borderTopRightRadius: "8px",
+                        opacity: "0.85",
+                      }}
+                    />
+                    <Flex
+                      style={{
+                        justifyContent: "flex-start",
+                        width: "100%",
+                        marginLeft: "4%",
+                      }}
+                    >
+                      <GameHeading style={{ marginRight: "5%", lineHeight: "28px" }}> 
+                        🎯 {game.name} <br /> ⌛ {new Date(game.updatedAt).toLocaleString("en-US", { dateStyle: "long"})}
+                      </GameHeading>
+                    </Flex>
+                  </GameCard>
+                ) : null
               ))}
             </FlexScroll>
           </Grid>
@@ -199,7 +182,7 @@ const Home = () => {
         <GameModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          title={"My creations"}
+          title={"My creations 📚"}
           gameData={modalData}
         />
       </Grid>
