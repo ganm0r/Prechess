@@ -4,7 +4,7 @@ import colors from "../theme/colors";
 import typography from "../theme/typography";
 
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from  "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 import { GameForm } from "./GameForm";
 import { useState } from "react";
@@ -48,7 +48,6 @@ const SubHeading = styled.h1`
 
 const Navbar = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [modalData, setModalData] = useState({});
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -77,7 +76,7 @@ const Navbar = () => {
                         <SubHeading
                             onClick={onLogout}
                         >
-                        Logout<span style={{ paddingLeft: "8px" }}>🚪</span>
+                            Logout<span style={{ paddingLeft: "8px" }}>🚪</span>
                         </SubHeading>
                     </Flex>
                 </StyledNavbar>
@@ -89,8 +88,7 @@ const Navbar = () => {
             <GameForm 
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                title={"Create"}
-                gameData={modalData}
+                title={"Create ✨"}
             />
         </React.Fragment>
     );
