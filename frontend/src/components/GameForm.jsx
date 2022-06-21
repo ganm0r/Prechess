@@ -5,12 +5,12 @@ import typography from "../theme/typography";
 
 import { Input } from "./Input";
 import { Button } from "./Button";
-import { Select } from "./Select";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { HashLoader } from "react-spinners";
 import { GrClose } from "react-icons/gr";
+import { createGame } from "../features/games/gameSlice";
 
 const Overlay = styled.div`
     position: fixed;
@@ -33,7 +33,8 @@ const StyledModal = styled.div`
     border-radius: 8px;
     min-width: 524px;
     max-width: 524px;
-    min-height: 620px;
+    min-height: 672px;
+    max-height: 672px;
 
     ::-webkit-scrollbar {
         width: 0;
@@ -44,7 +45,7 @@ const StyledModal = styled.div`
 const StyledModalForm = styled.form`
     display: grid;
     position: relative;
-    grid-template-rows: repeat(5, 0.5fr);
+    grid-template-rows: 0.5fr repeat(3, 1.7fr) 0.5fr;
     margin: 2%;
     margin-top: 0;
 `;
@@ -71,23 +72,6 @@ const SubHeading = styled.h1`
     user-select: none;
 `;
 
-const StyledOption = styled.option`
-    background-color: ${colors.black};
-    color: ${colors.white};
-`;
-
-const GAME_TYPES = [
-    {
-      type: "Opening",
-    },
-    {
-      type: "Preparation",
-    },
-    {
-      type: "Game",
-    },
-];
-
 const GameForm = ({ isOpen, onClose, gameData, title }) => {
     const [formData, setFormData] = useState({
         name: "",
@@ -103,17 +87,39 @@ const GameForm = ({ isOpen, onClose, gameData, title }) => {
         setFormData((prevState) => ({
           ...prevState,
           [event.target.name]: event.target.value,
-        }))
+        }));
     };
 
     const onSubmit = (event) => {
         event.preventDefault();
 
-        const gameData = {
-          name,
-          type,
-          game,
-        };
+        if(!(type === 'Opening' || type === 'Preparation' || type === 'Game')) {
+            toast.error("Please input a valid game type");
+
+            setFormData({
+                name: "",
+                type: "",
+                game: "",
+            });
+        } else {
+            const gameData = {
+                name,
+                type,
+                game,
+            };
+      
+            dispatch(createGame(gameData));
+
+            toast.success(type + " added successfully!");
+    
+            setFormData({
+                name: "",
+                type: "",
+                game: "",
+            });
+
+            onClose();
+        }
     }
 
     if(!isOpen) return null;
@@ -122,7 +128,7 @@ const GameForm = ({ isOpen, onClose, gameData, title }) => {
         <React.Fragment>
             <Overlay>
                 <StyledModal>
-                    <StyledModalForm>
+                    <StyledModalForm onSubmit={onSubmit}>
                         <Flex
                             style={{
                                     backgroundColor: `${colors.orange}`,
@@ -139,7 +145,7 @@ const GameForm = ({ isOpen, onClose, gameData, title }) => {
                                     textTransform: "uppercase",
                                 }}
                             >
-                                {title} ✨
+                                {title}
                             </SubHeading>
                             <GrClose
                                 size={"32px"}
@@ -162,27 +168,25 @@ const GameForm = ({ isOpen, onClose, gameData, title }) => {
                             value={name}
                             onChange={onChange}
                         />
-                        <Select
+                        <Input
+                            type={"text"}
                             title={"Type"}
+                            placeholder={"Opening"}
                             required={true}
-                            info={"Select game type!"}
+                            info={"Pick a type from Opening, Preparation, Game"}
                             id={"type"}
                             name={"type"}
                             value={type}
                             onChange={onChange}
-                        >
-                            {GAME_TYPES.map((game) => (
-                                <StyledOption key={game.type} value={game.type}>{game.type}</StyledOption>
-                            ))}
-                        </Select>
+                        />
                         <Input
                             type={"text"}
                             title={"PNG"}
                             placeholder={"1. d4 d5 2. Nf3 Nf6 3. Bf4"}
                             required={true}
                             info={"Your awesome png please!"}
-                            id={"png"}
-                            name={"png"}
+                            id={"game"}
+                            name={"game"}
                             value={game}
                             onChange={onChange}
                         />
