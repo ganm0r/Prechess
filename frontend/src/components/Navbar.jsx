@@ -13,7 +13,7 @@ const Flex = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-width: 372px;
+    min-width: 380px;
 `;
 
 const StyledNavbar = styled.div`
