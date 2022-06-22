@@ -59,7 +59,7 @@ const StyledInputField = styled.input`
     }
 `;
 
-const Input = ({ title, type, placeholder, required, info, id, name, value, className, onChange }) => {
+const Input = ({ title, type, placeholder, required, info, id, name, value, className, onChange, maxLength }) => {
   return (
     <React.Fragment>
         <Grid
@@ -90,6 +90,7 @@ const Input = ({ title, type, placeholder, required, info, id, name, value, clas
                 className={className}
                 value={value}
                 onChange={onChange}
+                maxLength={maxLength}
             ></StyledInputField>
         </Grid>
     </React.Fragment>
