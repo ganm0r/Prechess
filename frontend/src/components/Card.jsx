@@ -11,7 +11,7 @@ const StyledCard = styled.div`
     margin-bottom: 16px;
 `;
 
-const Card = ({ children, gridTemplateRows }) => {
+const Card = ({ children, gridTemplateRows, bgColor }) => {
   return (
     <React.Fragment>
         <StyledCard
