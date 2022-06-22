@@ -17,6 +17,7 @@ const Card = ({ children, gridTemplateRows }) => {
         <StyledCard
             style={{
                 gridTemplateRows: gridTemplateRows,
+                backgroundColor: bgColor,
             }}
         >
             {children}
