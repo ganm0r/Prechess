@@ -164,6 +164,7 @@ const GameModal = ({ isOpen, onClose, gameData, title, onDelete }) => {
                 }}
                 onClick={() => {
                   navigator.clipboard.writeText(gameData.game);
+                  toast.success("PGN copied to clipboard!");
                 }}
               >
                 <SubHeading
