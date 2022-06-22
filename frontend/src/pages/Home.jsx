@@ -3,14 +3,13 @@ import styled from "styled-components";
 import colors from "../theme/colors";
 import typography from "../theme/typography";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { GameCard } from "../components/GameCard";
-import { GameModal } from "../components/GameModal";
-import { GameForm } from "../components/GameForm";
-import { getGames, reset } from "../features/games/gameSlice";
+import { getGames, deleteGame, reset } from "../features/games/gameSlice";
 import { HashLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 const Grid = styled.div`
   display: grid;
@@ -43,17 +42,28 @@ const FlexScroll = styled.div`
 const SubHeading = styled.h1`
   margin: 0;
   font-weight: ${typography.fontWeights.black};
-  font-size: 24px;
+  font-size: 28px;
   color: ${colors.white};
   user-select: none;
 `;
 
-const GameHeading = styled.h1`
-  font-weight: ${typography.fontWeights.black};
-  font-family: ${typography.fonts.primary};
-  font-size: 16px;
-  color: ${colors.white};
-  user-select: none;
+const StyledCard = styled.div`
+    display: grid;
+    background-color: ${colors.black};
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin-bottom: 22px;
+    max-width: 200px;
+    min-width: 200px;
+    max-height: 200px;
+    min-height: 200px;
+    overflow: scroll;
+    text-align: left;
+    opacity: 0.8;
+
+    ::-webkit-scrollbar {
+      height: 0px;
+    }
 `;
 
 const HOME_ROWS = [
@@ -69,14 +79,11 @@ const HOME_ROWS = [
 ];
 
 const Home = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalData, setModalData] = useState({});
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
-  const { games, isLoading, isError, isSuccess, message } = useSelector((state) => state.games);
+  const { games, isLoading, isError, message } = useSelector((state) => state.games);
 
   useEffect(() => {
     if(isError) {
@@ -120,12 +127,14 @@ const Home = () => {
       >
         {HOME_ROWS.map((content) => (
           <Grid
+            key={content.heading}
             style={{
               alignItems: "center",
               justifyContent: "center",
               gridTemplateColumns: "1fr 5fr",
               margin: "0",
               marginTop: "1.2%",
+              textAlign: "center",
             }}
           >
             <SubHeading key={`${content.heading}`}>{content.heading}</SubHeading>
@@ -136,55 +145,36 @@ const Home = () => {
                 height: "auto",
                 overflowX: "scroll",
                 scrollbarWidth: "thin",
-                width: "80vw",
+                width: "82vw",
               }}
             >
+              <StyledCard>
+                <SubHeading
+                  style={{
+                    marginLeft: "20%",
+                    marginTop: "20%",
+                    fontSize: "96px",
+                  }}
+                >
+                  ♟️
+                </SubHeading>
+              </StyledCard>
               {games.map((game) => (
                 content.heading.includes(game.type.toUpperCase()) ? (
                   <GameCard
                     gridTemplateRows={"repeat(2, 1fr)"}
-                    key={game.name}
-                    gameTitle={game.name}
-                    onGameCardClick={() => {
-                      setModalData(game);
-                      setIsModalOpen(true);
+                    key={game._id}
+                    game={game}
+                    onGameDelete={() => {
+                      dispatch(deleteGame(game._id));
+                      toast.success(game.type + " deleted successfully!");
                     }}
-                  >
-                    <img
-                      src="/prechess.jpg"
-                      width="100%"
-                      height="auto"
-                      margin="0"
-                      alt="prechess"
-                      style={{
-                        borderTopLeftRadius: "8px",
-                        borderTopRightRadius: "8px",
-                        opacity: "0.85",
-                      }}
-                    />
-                    <Flex
-                      style={{
-                        justifyContent: "flex-start",
-                        width: "100%",
-                        marginLeft: "4%",
-                      }}
-                    >
-                      <GameHeading style={{ marginRight: "5%", lineHeight: "28px" }}> 
-                        🎯 {game.name} <br /> ⌛ {new Date(game.updatedAt).toLocaleString("en-US", { dateStyle: "long"})}
-                      </GameHeading>
-                    </Flex>
-                  </GameCard>
+                  />
                 ) : null
               ))}
             </FlexScroll>
           </Grid>
         ))}
-        <GameModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          title={"My creations 📚"}
-          gameData={modalData}
-        />
       </Grid>
     </React.Fragment>
   );
