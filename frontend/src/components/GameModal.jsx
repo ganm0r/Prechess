@@ -5,6 +5,7 @@ import typography from "../theme/typography";
 
 import { GrClose } from "react-icons/gr";
 import { Button } from "./Button";
+import { toast } from "react-toastify";
 
 const Overlay = styled.div`
   position: fixed;
