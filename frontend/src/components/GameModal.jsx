@@ -28,7 +28,8 @@ const StyledModal = styled.div`
     border-radius: 8px;
     min-width: 524px;
     max-width: 524px;
-    min-height: 624px;
+    min-height: 600px;
+    max-height: 600px;
 
     ::-webkit-scrollbar {
         width: 0;
@@ -57,6 +58,26 @@ const Flex = styled.div`
   }
 `;
 
+const CopyFlex = styled.div`
+  display: flex;
+  max-width: 506px;
+  min-width: 506px;
+  margin: 0;
+  margin-top: 2%;
+  role: button;
+  cursor: pointer;
+  box-shadow: 0px 0px 16px ${colors.orange};
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+`;
+
 const SubHeading = styled.h1`
   margin: 0;
   font-weight: ${typography.fontWeights.black};
@@ -66,12 +87,11 @@ const SubHeading = styled.h1`
   user-select: none;
 `;
 
-const GameModal = ({ isOpen, onClose, gameData, title }) => {
-    if(!isOpen) return null;
+const GameModal = ({ isOpen, onClose, gameData, title, onDelete }) => {
 
     return (
         <React.Fragment>
-            <Overlay>
+            { isOpen && <Overlay>
                 <StyledModal>
                     <Grid>
                         <Flex
@@ -90,7 +110,7 @@ const GameModal = ({ isOpen, onClose, gameData, title }) => {
                                     textTransform: "uppercase",
                                 }}
                             >
-                                {title} 📚  
+                                {title}
                             </SubHeading>
                             <GrClose
                                 size={"32px "}
@@ -130,15 +150,21 @@ const GameModal = ({ isOpen, onClose, gameData, title }) => {
                                 {gameData.type}
                             </SubHeading>
                         </Flex>
-                        <Flex
+                        <CopyFlex
                             style={{
                                 backgroundColor: `${colors.black}`,
                                 borderRadius: "8px",
                                 height: "100%",
-                                marginTop: "9%",
+                                marginTop: "7%",
                                 zIndex: "1",
                                 overflow: "hidden",
                                 overflowY: "scroll",
+                                maxHeight: "232px",
+                                textAlign: "left",
+                            }}
+                            onClick={() => {
+                                navigator.clipboard.writeText(gameData.game);
+                                
                             }}
                         >
                             <SubHeading
@@ -148,20 +174,18 @@ const GameModal = ({ isOpen, onClose, gameData, title }) => {
                             >
                                 {gameData.game}
                             </SubHeading>
-                        </Flex>
-                        <Flex
-                            style={{
-                                justifyContent: "space-between",
-                                alignItems: "center",
-                                marginBottom: "2%",
+                        </CopyFlex>
+                        <Button 
+                            onClick={() => {
+                                onClose();
+                                onDelete();
                             }}
                         >
-                            <Button>Update<span style={{ paddingLeft: "8px" }}>📝</span></Button>
-                            <Button>Delete<span style={{ paddingLeft: "8px" }}>🗑️</span></Button>
-                        </Flex>
+                                Delete<span style={{ paddingLeft: "8px" }}>🗑️</span>
+                        </Button>
                     </Grid>
                 </StyledModal>
-            </Overlay>
+            </Overlay>}
         </React.Fragment>
     );
 };
