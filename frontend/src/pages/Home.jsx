@@ -29,7 +29,7 @@ const FlexScroll = styled.div`
   }
 
   ::-webkit-scrollbar-track {
-    background: ${colors.black}; 
+    background: ${colors.black};
   }
 
   ::-webkit-scrollbar-thumb {
@@ -48,22 +48,22 @@ const SubHeading = styled.h1`
 `;
 
 const StyledCard = styled.div`
-    display: grid;
-    background-color: ${colors.black};
-    border-radius: 8px;
-    box-sizing: border-box;
-    margin-bottom: 22px;
-    max-width: 200px;
-    min-width: 200px;
-    max-height: 200px;
-    min-height: 200px;
-    overflow: scroll;
-    text-align: left;
-    opacity: 0.8;
+  display: grid;
+  background-color: ${colors.black};
+  border-radius: 8px;
+  box-sizing: border-box;
+  margin-bottom: 22px;
+  max-width: 200px;
+  min-width: 200px;
+  max-height: 200px;
+  min-height: 200px;
+  overflow: scroll;
+  text-align: left;
+  opacity: 0.8;
 
-    ::-webkit-scrollbar {
-      height: 0px;
-    }
+  ::-webkit-scrollbar {
+    height: 0px;
+  }
 `;
 
 const HOME_ROWS = [
@@ -83,14 +83,16 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
-  const { games, isLoading, isError, message } = useSelector((state) => state.games);
+  const { games, isLoading, isError, message } = useSelector(
+    (state) => state.games
+  );
 
   useEffect(() => {
-    if(isError) {
+    if (isError) {
       console.log(message);
     }
 
-    if(!user) {
+    if (!user) {
       navigate("/");
     }
 
@@ -98,22 +100,22 @@ const Home = () => {
 
     return () => {
       dispatch(reset());
-    }
+    };
   }, [user, navigate, dispatch, isError, message]);
 
-  if(isLoading) {
+  if (isLoading) {
     return (
       <Flex
         style={{
           alignItems: "center",
-          justifyContent: "center"
+          justifyContent: "center",
         }}
       >
         <HashLoader color={colors.orange} />
       </Flex>
-    )
+    );
   }
-  
+
   return (
     <React.Fragment>
       <Grid
@@ -137,7 +139,9 @@ const Home = () => {
               textAlign: "center",
             }}
           >
-            <SubHeading key={`${content.heading}`}>{content.heading}</SubHeading>
+            <SubHeading key={`${content.heading}`}>
+              {content.heading}
+            </SubHeading>
             <FlexScroll
               style={{
                 flexDirection: "row",
@@ -159,7 +163,7 @@ const Home = () => {
                   ♟️
                 </SubHeading>
               </StyledCard>
-              {games.map((game) => (
+              {games.map((game) =>
                 content.heading.includes(game.type.toUpperCase()) ? (
                   <GameCard
                     gridTemplateRows={"repeat(2, 1fr)"}
@@ -171,7 +175,7 @@ const Home = () => {
                     }}
                   />
                 ) : null
-              ))}
+              )}
             </FlexScroll>
           </Grid>
         ))}

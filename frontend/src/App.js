@@ -19,10 +19,10 @@ const App = () => {
         <MainContainer>
           <Navbar />
           <Routes>
-            <Route path="/" element={ <Landing /> } />
-            <Route path="/login" element={ <Login /> } />
-            <Route path="/register" element={ <Register /> } />
-            <Route path="/home" element={ <Home /> } />
+            <Route path="/" element={<Landing />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/home" element={<Home />} />
           </Routes>
         </MainContainer>
         <Masthead />
@@ -30,6 +30,6 @@ const App = () => {
       <ToastContainer />
     </React.Fragment>
   );
-}
+};
 
 export default App;

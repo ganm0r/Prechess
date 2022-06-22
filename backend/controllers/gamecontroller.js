@@ -9,9 +9,9 @@ const User = require("../models/usermodel");
     @access         Private
 */
 const getGames = asyncHandler(async (req, res) => {
-    const games = await Game.find({ user: req.user.id });
-    
-    res.status(200).send(games);
+  const games = await Game.find({ user: req.user.id });
+
+  res.status(200).send(games);
 });
 
 /*
@@ -20,14 +20,14 @@ const getGames = asyncHandler(async (req, res) => {
     @access         Private
 */
 const setGame = asyncHandler(async (req, res) => {
-    const game = await Game.create({
-        user: req.user.id,
-        name: req.body.name,
-        type: req.body.type,
-        game: req.body.game,
-    })
+  const game = await Game.create({
+    user: req.user.id,
+    name: req.body.name,
+    type: req.body.type,
+    game: req.body.game,
+  });
 
-    res.status(200).send(game);
+  res.status(200).send(game);
 });
 
 /*
@@ -36,28 +36,28 @@ const setGame = asyncHandler(async (req, res) => {
     @access         Private
 */
 const updateGame = asyncHandler(async (req, res) => {
-    const game = await Game.findById(req.params.id);
+  const game = await Game.findById(req.params.id);
 
-    if(!game) {
-        res.status(400);
-        throw new Error("[error] game not found");
-    }
+  if (!game) {
+    res.status(400);
+    throw new Error("[error] game not found");
+  }
 
-    if(!req.user) {
-        res.status(401);
-        throw new Error("[error] user not found");
-    }
+  if (!req.user) {
+    res.status(401);
+    throw new Error("[error] user not found");
+  }
 
-    if(game.user.toString() !== req.user.id) {
-        res.status(401);
-        throw new Error("[error] user not authorized")
-    }
+  if (game.user.toString() !== req.user.id) {
+    res.status(401);
+    throw new Error("[error] user not authorized");
+  }
 
-    const updatedGame = await Game.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-    });
+  const updatedGame = await Game.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
 
-    res.status(200).send(updatedGame);
+  res.status(200).send(updatedGame);
 });
 
 /*
@@ -66,31 +66,31 @@ const updateGame = asyncHandler(async (req, res) => {
     @access         Private
 */
 const deleteGame = asyncHandler(async (req, res) => {
-    const game = await Game.findById(req.params.id);
+  const game = await Game.findById(req.params.id);
 
-    if(!game) {
-        res.status(400);
-        throw new Error("[error] game not found");
-    }
+  if (!game) {
+    res.status(400);
+    throw new Error("[error] game not found");
+  }
 
-    if(!req.user) {
-        res.status(401);
-        throw new Error("[error] user not found");
-    }
+  if (!req.user) {
+    res.status(401);
+    throw new Error("[error] user not found");
+  }
 
-    if(game.user.toString() !== req.user.id) {
-        res.status(401);
-        throw new Error("[error] user not authorized")
-    }
+  if (game.user.toString() !== req.user.id) {
+    res.status(401);
+    throw new Error("[error] user not authorized");
+  }
 
-    await game.remove();
+  await game.remove();
 
-    res.status(200).send({ id: req.params.id });
+  res.status(200).send({ id: req.params.id });
 });
 
 module.exports = {
-    getGames,
-    setGame,
-    updateGame,
-    deleteGame,
+  getGames,
+  setGame,
+  updateGame,
+  deleteGame,
 };

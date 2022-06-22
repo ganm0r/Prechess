@@ -43,7 +43,7 @@ const Form = styled.form`
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
   const { email, password } = formData;
@@ -51,27 +51,28 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user, isLoading, isSuccess, isError, message } = useSelector((state) => state.auth);
+  const { user, isLoading, isSuccess, isError, message } = useSelector(
+    (state) => state.auth
+  );
 
   useEffect(() => {
-    if(isError) {
+    if (isError) {
       toast.error(message);
     }
 
-    if(isSuccess || user) {
+    if (isSuccess || user) {
       navigate("/home");
     }
 
     dispatch(reset());
-
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (event) => {
     setFormData((prevState) => ({
       ...prevState,
       [event.target.name]: event.target.value,
-    }))
-  }
+    }));
+  };
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -82,30 +83,30 @@ const Login = () => {
     };
 
     dispatch(login(userData));
-  }
+  };
 
-  if(isLoading) {
+  if (isLoading) {
     return (
       <Flex
         style={{
           alignItems: "center",
-          justifyContent: "center"
+          justifyContent: "center",
         }}
       >
         <HashLoader color={colors.orange} />
       </Flex>
-    )
+    );
   }
 
   return (
     <React.Fragment>
       <Grid
         style={{
-            alignItems: "center",
-            justifyItems: "center",
-            height: "96%",
-            marginLeft: "5%",
-            marginRight: "5%",
+          alignItems: "center",
+          justifyItems: "center",
+          height: "96%",
+          marginLeft: "5%",
+          marginRight: "5%",
         }}
       >
         <Card>
@@ -114,10 +115,8 @@ const Login = () => {
               gridTemplateRows: "1fr 5fr",
             }}
           >
-            <SubHeading>
-              Hello again! Let's sign you in 🚀
-            </SubHeading>
-            <Form onSubmit={onSubmit} >
+            <SubHeading>Hello again! Let's sign you in 🚀</SubHeading>
+            <Form onSubmit={onSubmit}>
               <Input
                 type={"email"}
                 title={"Email Address"}
@@ -140,9 +139,7 @@ const Login = () => {
                 value={password}
                 onChange={onChange}
               />
-              <Button
-                type={"submit"}
-              >
+              <Button type={"submit"}>
                 Let's Go<span style={{ paddingLeft: "4px" }}>🪴</span>
               </Button>
             </Form>
