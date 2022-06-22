@@ -83,9 +83,9 @@ const deleteGame = asyncHandler(async (req, res) => {
         throw new Error("[error] user not authorized")
     }
 
-    const deletedGame = await Game.findByIdAndDelete(req.params.id);
+    await game.remove();
 
-    res.status(200).send(deletedGame);
+    res.status(200).send({ id: req.params.id });
 });
 
 module.exports = {
