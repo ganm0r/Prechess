@@ -5,10 +5,9 @@ import typography from "../theme/typography";
 
 import { Input } from "./Input";
 import { Button } from "./Button";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { HashLoader } from "react-spinners";
 import { GrClose } from "react-icons/gr";
 import { createGame } from "../features/games/gameSlice";
 
@@ -33,8 +32,8 @@ const StyledModal = styled.div`
     border-radius: 8px;
     min-width: 524px;
     max-width: 524px;
-    min-height: 672px;
-    max-height: 672px;
+    min-height: 600px;
+    max-height: 600px;
 
     ::-webkit-scrollbar {
         width: 0;
@@ -45,7 +44,7 @@ const StyledModal = styled.div`
 const StyledModalForm = styled.form`
     display: grid;
     position: relative;
-    grid-template-rows: 0.5fr repeat(3, 1.7fr) 0.5fr;
+    grid-template-rows: 0.5fr repeat(3, 1fr) 0.5fr;
     margin: 2%;
     margin-top: 0;
 `;
@@ -110,7 +109,7 @@ const GameForm = ({ isOpen, onClose, gameData, title }) => {
       
             dispatch(createGame(gameData));
 
-            toast.success(type + " added successfully!");
+            toast.success(type + " created successfully!");
     
             setFormData({
                 name: "",
@@ -135,7 +134,7 @@ const GameForm = ({ isOpen, onClose, gameData, title }) => {
                                     justifyContent: "space-between",
                                     alignItems: "center",
                                     borderRadius: "8px",
-                                    marginBottom: "4%",
+                                    marginBottom: "3.5%",
                                 }}
                             >
                             <SubHeading
@@ -162,11 +161,12 @@ const GameForm = ({ isOpen, onClose, gameData, title }) => {
                             title={"Name"}
                             placeholder={"London System"}
                             required={true}
-                            info={"Maximum 30 characters please!"}
+                            info={"Maximum 14 characters please!"}
                             id={"name"}
                             name={"name"}
                             value={name}
                             onChange={onChange}
+                            maxLength={"14"}
                         />
                         <Input
                             type={"text"}
@@ -192,6 +192,7 @@ const GameForm = ({ isOpen, onClose, gameData, title }) => {
                         />
                         <Button
                             type={"submit"}
+                            marginTop={"3%"}
                         >
                             Okay!<span style={{ paddingLeft: "4px" }}>🚀</span>
                         </Button>
