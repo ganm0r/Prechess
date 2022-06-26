@@ -44,7 +44,10 @@ const GameHeading = styled.h1`
 
 const GameCard = ({ children, gridTemplateRows, game, onGameDelete }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalData, setModalData] = useState({});
+
+  const dateGameUpdatedAt = new Date(game.updatedAt).toLocaleString("en-US", {
+    dateStyle: "long",
+  });
 
   return (
     <React.Fragment>
@@ -53,7 +56,6 @@ const GameCard = ({ children, gridTemplateRows, game, onGameDelete }) => {
           gridTemplateRows: gridTemplateRows,
         }}
         onClick={() => {
-          setModalData(game);
           setIsModalOpen(true);
         }}
       >
@@ -80,10 +82,7 @@ const GameCard = ({ children, gridTemplateRows, game, onGameDelete }) => {
             style={{ marginRight: "5%", lineHeight: "28px", textAlign: "left" }}
           >
             🎯 {game.name}
-            <br />⌛{" "}
-            {new Date(game.updatedAt).toLocaleString("en-US", {
-              dateStyle: "long",
-            })}
+            <br />⌛ {dateGameUpdatedAt}
           </GameHeading>
         </Flex>
       </StyledCard>
@@ -92,7 +91,7 @@ const GameCard = ({ children, gridTemplateRows, game, onGameDelete }) => {
         onClose={() => setIsModalOpen(false)}
         title={"My Creations 📚"}
         onDelete={onGameDelete}
-        gameData={modalData}
+        gameData={game}
       />
     </React.Fragment>
   );
