@@ -14,6 +14,10 @@ const Grid = styled.div`
   position: relative;
 `;
 
+const Flex = styled.div`
+  display: flex;
+`;
+
 const Heading = styled.h1`
   margin: 0;
   font-weight: ${typography.fontWeights.black};
@@ -52,14 +56,13 @@ const Landing = () => {
     <React.Fragment>
       <Grid
         style={{
-          gridTemplateColumns: "0.9fr 0.7fr",
+          gridTemplateColumns: "1.5fr 1fr",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
         <Grid
           style={{
-            height: "80%",
             padding: "36px",
             paddingTop: "64px",
             gridTemplateRows: "2.5fr 1.5fr 1fr",
@@ -94,14 +97,22 @@ const Landing = () => {
             </Button>
           </Grid>
         </Grid>
-        <Image
-          src="/Vishy.png"
-          alt="Vishy Anand"
+        <Flex
           style={{
-            height: "90%",
-            marginTop: "21%",
+            justifyContent: "center",
+            height: "95%",
+            marginTop: "15%",
           }}
-        />
+        >
+          <Image
+            src="/Magnus.png"
+            alt="Magnus Carlsen"
+            style={{
+              maxWidth: "100%",
+              height: "auto",
+            }}
+          />
+        </Flex>
       </Grid>
     </React.Fragment>
   );
