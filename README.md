@@ -23,7 +23,7 @@ Crafted with ❤︎ by Gandharv More
 📑 License
 ==========
 
-Copyright (c) 2021 Danyl Fernandes
+Copyright (c) 2021 Gandharv More
 
 ```
 MIT License
