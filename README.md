@@ -2,9 +2,9 @@
 
 ![version](https://img.shields.io/badge/version-0.1-blue.svg) ![license](https://img.shields.io/badge/license-MIT-red.svg) ![GitHub issues](https://img.shields.io/github/issues/ganm0r/prechess) ![Linter](https://github.com/grewscant/synement/workflows/Lint%20Code%20Base/badge.svg)
 
-![prechess](https://raw.githubusercontent.com/ganm0r/images/main/prechess.png?token=GHSAT0AAAAAABUWX6WID3HPCPX76UBKLFTOYVYEGNQ)
+![prechess](frontend/screenshots/1.png)
 
-![prechess-home](https://raw.githubusercontent.com/ganm0r/images/main/prechess-1.png?token=GHSAT0AAAAAABUWX6WIP24TJI24U6SWXFM4YVYEHHA)
+![prechess-home](frontend/screenshots/2.png)
 
 # 🎨 Design
 
