@@ -1,6 +1,6 @@
 # [PreChess](https://prechess.herokuapp.com)
 
-![version](https://img.shields.io/badge/version-0.1-blue.svg) ![license](https://img.shields.io/badge/license-MIT-red.svg) ![GitHub issues](https://img.shields.io/github/issues/ganm0r/prechess) ![Linter](https://github.com/ganm0r/prechess/workflows/Lint%20Code%20Base/badge.svg)
+![version](https://img.shields.io/badge/version-0.1-blue.svg) ![license](https://img.shields.io/badge/license-MIT-red.svg) ![GitHub issues](https://img.shields.io/github/issues/ganm0r/prechess)
 
 ![prechess](frontend/screenshots/1.png)
 
